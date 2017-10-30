@@ -3,11 +3,12 @@ package com.wxm.base.pojo.dataobject;
 import javax.persistence.Column;
 
 /**
- * 逻辑删除属性基类
  * 
+ * <b>Title:</b> 逻辑删除属性基类<br>
+ * <b>Description:</b> <br>
+ * <b>Date:</b> 2017年10月30日 上午11:40:48<br>
  * @author wuxm
- * @date 2017年10月27日 上午11:53:47
- * @see 1.0.0
+ * @version 1.0.0
  */
 public class BaseLogicDO extends BaseUUIDDO {
     /**

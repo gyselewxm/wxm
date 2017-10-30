@@ -4,11 +4,12 @@ import javax.persistence.Column;
 import javax.persistence.Id;
 
 /**
- * UUID基类
  * 
+ * <b>Title:</b> UUID基类<br>
+ * <b>Description:</b> <br>
+ * <b>Date:</b> 2017年10月30日 上午11:40:59<br>
  * @author wuxm
- * @date 2017年10月27日 上午11:50:27
- * @see 1.0.0
+ * @version 1.0.0
  */
 public class BaseUUIDDO {
     /**

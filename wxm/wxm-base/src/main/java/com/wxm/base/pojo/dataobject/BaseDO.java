@@ -5,11 +5,12 @@ import java.util.Date;
 import javax.persistence.Column;
 
 /**
- * 数据源基类
  * 
+ * <b>Title:</b> 数据源基类<br>
+ * <b>Description:</b> <br>
+ * <b>Date:</b> 2017年10月30日 上午11:40:24<br>
  * @author wuxm
- * @date 2017年10月27日 下午1:22:40
- * @see 1.0.0
+ * @version 1.0.0
  */
 public class BaseDO extends BaseLogicDO {
     /**
