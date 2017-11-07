@@ -4,11 +4,15 @@ import java.util.Date;
 
 import javax.persistence.Column;
 
+import com.wxm.base.annotation.ColumnDefault;
+import com.wxm.base.annotation.ColumnDefault.ColumnDefaultEnum;
+
 /**
  * 
  * <b>Title:</b> 数据源基类<br>
  * <b>Description:</b> <br>
  * <b>Date:</b> 2017年10月30日 上午11:40:24<br>
+ * 
  * @author wuxm
  * @version 1.0.0
  */
@@ -16,22 +20,21 @@ public class BaseDO extends BaseLogicDO {
     /**
      * 创建时间
      */
-    @Column
+    @Column(updatable = false, nullable = false)
+    @ColumnDefault(ColumnDefaultEnum.CURRENT_DATETIME)
     private Date createdTime;
     /**
      * 创建人ID
      */
-    @Column
+    @Column(updatable = false)
     private String createdBy;
     /**
      * 更新时间
      */
-    @Column
     private Date modifiedTime;
     /**
      * 更新人ID
      */
-    @Column
     private String modifiedBy;
 
     public Date getCreatedTime() {

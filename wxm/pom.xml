@@ -6,5 +6,7 @@
   <packaging>pom</packaging>
   <modules>
   	<module>wxm-base</module>
+  	<module>wxm-mybatis</module>
+  	<module>wxm-service</module>
   </modules>
 </project>

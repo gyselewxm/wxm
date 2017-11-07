@@ -8,12 +8,43 @@
   </parent>
   <artifactId>wxm-base</artifactId>
 
+  <properties>
+    <version.spring>5.0.0.RELEASE</version.spring>
+    <version.slf4j>1.7.25</version.slf4j>
+    <version.persistence>1.0.2.GA</version.persistence>
+  </properties>
+
+  <dependencyManagement>
+    <dependencies>
+      <dependency>
+        <groupId>org.springframework</groupId>
+        <artifactId>spring-framework-bom</artifactId>
+        <version>${version.spring}</version>
+        <type>pom</type>
+        <scope>import</scope>
+      </dependency>
+    </dependencies>
+  </dependencyManagement>
+
   <dependencies>
+    <!-- Spring -->
+    <dependency>
+      <groupId>org.springframework</groupId>
+      <artifactId>spring-core</artifactId>
+    </dependency>
+
+    <!-- 日志接口规范 -->
+    <dependency>
+      <groupId>org.slf4j</groupId>
+      <artifactId>slf4j-api</artifactId>
+      <version>${version.slf4j}</version>
+    </dependency>
+
     <!-- 注解 -->
     <dependency>
       <groupId>org.hibernate</groupId>
       <artifactId>ejb3-persistence</artifactId>
-      <version>1.0.2.GA</version>
+      <version>${version.persistence}</version>
     </dependency>
   </dependencies>
 </project>
