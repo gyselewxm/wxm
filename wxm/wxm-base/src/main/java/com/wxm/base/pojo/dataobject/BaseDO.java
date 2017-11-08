@@ -6,7 +6,6 @@ import javax.persistence.Column;
 
 import com.wxm.base.annotation.ColumnDefault;
 import com.wxm.base.annotation.ColumnDefault.ColumnDefaultEnum;
-
 /**
  * 
  * <b>Title:</b> 数据源基类<br>
@@ -20,7 +19,7 @@ public class BaseDO extends BaseLogicDO {
     /**
      * 创建时间
      */
-    @Column(updatable = false, nullable = false)
+    @Column(updatable = false)
     @ColumnDefault(ColumnDefaultEnum.CURRENT_DATETIME)
     private Date createdTime;
     /**
