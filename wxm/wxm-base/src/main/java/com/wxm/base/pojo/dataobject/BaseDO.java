@@ -4,8 +4,6 @@ import java.util.Date;
 
 import javax.persistence.Column;
 
-import com.wxm.base.annotation.ColumnDefault;
-import com.wxm.base.annotation.ColumnDefault.ColumnDefaultEnum;
 /**
  * 
  * <b>Title:</b> 数据源基类<br>
@@ -19,8 +17,7 @@ public class BaseDO extends BaseLogicDO {
     /**
      * 创建时间
      */
-    @Column(updatable = false)
-    @ColumnDefault(ColumnDefaultEnum.CURRENT_DATETIME)
+    @Column(insertable = false, updatable = false)
     private Date createdTime;
     /**
      * 创建人ID
@@ -30,6 +27,7 @@ public class BaseDO extends BaseLogicDO {
     /**
      * 更新时间
      */
+    @Column(insertable = false, updatable = false)
     private Date modifiedTime;
     /**
      * 更新人ID

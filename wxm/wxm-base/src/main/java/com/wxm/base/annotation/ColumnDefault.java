@@ -11,7 +11,7 @@ import java.lang.annotation.Target;
 /**
  * 
  * <b>Title:</b> 字段默认值 <br>
- * <b>Description:</b> <br>
+ * <b>Description:</b> 暂时无用<br>
  * <b>Date:</b> 2017年11月7日 下午11:06:15
  * 
  * @author wuxm
