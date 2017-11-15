@@ -1,7 +1,6 @@
 package com.wxm.base.pojo.dataobject;
 
 import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
 /**
@@ -18,7 +17,7 @@ public class BaseUUIDDO {
      * UUID主键
      */
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY, generator = "UUID")
+    @GeneratedValue(generator = "UUID")
     private String id;
 
     public String getId() {
