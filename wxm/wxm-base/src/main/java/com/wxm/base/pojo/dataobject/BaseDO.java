@@ -3,6 +3,7 @@ package com.wxm.base.pojo.dataobject;
 import java.util.Date;
 
 import javax.persistence.Column;
+import javax.persistence.OrderBy;
 
 /**
  * 
@@ -27,6 +28,7 @@ public class BaseDO extends BaseLogicDO {
     /**
      * 更新时间
      */
+    @OrderBy("DESC")
     @Column(insertable = false, updatable = false)
     private Date modifiedTime;
     /**
