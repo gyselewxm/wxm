@@ -2,7 +2,7 @@ package com.wxm.service.abs;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
-import com.wxm.mybatis.mapper.Mapper;
+import com.wxm.mybatis.mapper.common.Mapper;
 
 /**
  * 
@@ -15,7 +15,7 @@ import com.wxm.mybatis.mapper.Mapper;
  * @param <T>
  * @param <V>
  */
-public abstract class ABaseService<T, V, D, Q> {
+public abstract class ABaseService<T, B, Q> {
     @Autowired
-    protected Mapper<T, V, D, Q> mapper;
+    protected Mapper<T, B, Q> mapper;
 }

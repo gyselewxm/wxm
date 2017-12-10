@@ -1,7 +1,7 @@
 package com.wxm.service;
 
 import com.wxm.mybatis.datasource.annotation.DataSource;
-import com.wxm.mybatis.datasource.annotation.DataSource.DataSourceType;
+import com.wxm.mybatis.datasource.code.RoutingStrategy;
 
 /**
  * 
@@ -25,7 +25,7 @@ public interface ICreateService<T> {
      *            实体
      * @return 返回操作的记录数
      */
-    @DataSource(DataSourceType.master)
+    @DataSource(RoutingStrategy.MASTER)
     public int insert(T t);
 
     /**
@@ -39,6 +39,6 @@ public interface ICreateService<T> {
      *            实体列表
      * @return 返回操作的记录数
      */
-    @DataSource(DataSourceType.master)
+    @DataSource(RoutingStrategy.MASTER)
     public int insertSelective(T t);
 }

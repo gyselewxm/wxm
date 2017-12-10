@@ -7,6 +7,6 @@ package com.wxm.service;
  * <b>时间: </b>2017年6月25日 下午10:48:00 <br/>
  * <b>版本: </b>1.0
  */
-public interface ICRUDService<T, D> extends ICreateService<T>, IRetrieveService<T, D>, IUpdateService<T>, IDeleteService, IPagerService<D> {
+public interface ICRUDService<T, B> extends ICreateService<T>, IRetrieveService<T, B>, IUpdateService<T>, IDeleteService, IPagerService<B> {
 
 }

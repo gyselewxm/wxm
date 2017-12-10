@@ -3,7 +3,7 @@ package com.wxm.service;
 import java.util.List;
 
 import com.wxm.mybatis.datasource.annotation.DataSource;
-import com.wxm.mybatis.datasource.annotation.DataSource.DataSourceType;
+import com.wxm.mybatis.datasource.code.RoutingStrategy;
 
 /**
  * <b>标题: </b> 删除相关SERVICE接口 <br/>
@@ -26,7 +26,7 @@ public interface IDeleteService {
      *            实体ID
      * @return 返回操作记录数
      */
-    @DataSource(DataSourceType.master)
+    @DataSource(RoutingStrategy.MASTER)
     public int remove(String id);
 
     /**
@@ -41,6 +41,6 @@ public interface IDeleteService {
      *            实体ID列表
      * @return 返回操作记录数
      */
-    @DataSource(DataSourceType.master)
+    @DataSource(RoutingStrategy.MASTER)
     public int batchRemove(List<String> ids);
 }
