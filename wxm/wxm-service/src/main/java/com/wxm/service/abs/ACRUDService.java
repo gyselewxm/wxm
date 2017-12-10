@@ -9,6 +9,6 @@ import com.wxm.service.ICRUDService;
  * <b>时间: </b>2017年6月25日 下午10:49:30 <br/>
  * <b>版本: </b>1.0
  */
-public abstract class ACRUDService<T, B, Q> extends ABaseService<T, B, Q> implements
+public abstract class ACRUDService<T, B> extends ABaseService<T, B> implements
         ICRUDService<T, B> {
 }

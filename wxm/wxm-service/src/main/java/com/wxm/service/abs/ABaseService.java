@@ -15,7 +15,7 @@ import com.wxm.mybatis.mapper.common.Mapper;
  * @param <T>
  * @param <V>
  */
-public abstract class ABaseService<T, B, Q> {
+public abstract class ABaseService<T, B> {
     @Autowired
-    protected Mapper<T, B, Q> mapper;
+    protected Mapper<T, B> mapper;
 }
