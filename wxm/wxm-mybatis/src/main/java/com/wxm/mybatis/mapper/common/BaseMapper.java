@@ -40,11 +40,9 @@ import com.wxm.mybatis.mapper.common.base.BaseUpdateMapper;
  *            表对应实体
  * @param <B>
  *            表对应业务逻辑实体
- * @param <Q>
- *            表对应查询条件实体
  */
-public interface BaseMapper<T, B, Q> extends
-        BaseSelectMapper<T, B, Q>,
+public interface BaseMapper<T, B> extends
+        BaseSelectMapper<T, B>,
         BaseInsertMapper<T>,
         BaseUpdateMapper<T>,
         BaseDeleteMapper {

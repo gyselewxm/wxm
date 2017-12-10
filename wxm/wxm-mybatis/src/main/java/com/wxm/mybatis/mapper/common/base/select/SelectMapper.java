@@ -42,10 +42,8 @@ import java.util.List;
  *            表对应实体
  * @param <B>
  *            表对应业务逻辑实体
- * @param <Q>
- *            表对应查询条件实体
  */
-public interface SelectMapper<T, B, Q> {
+public interface SelectMapper<T, B> {
 
     /**
      * 
@@ -60,7 +58,7 @@ public interface SelectMapper<T, B, Q> {
      * @return 表对应实体信息列表
      */
     @SelectProvider(type = BaseSelectProvider.class, method = "dynamicSQL")
-    List<T> select(Q query);
+    List<T> select(Object query);
 
     /**
      * 
@@ -75,6 +73,6 @@ public interface SelectMapper<T, B, Q> {
      * @return 表对应业务逻辑实体信息列表
      */
     @SelectProvider(type = BaseSelectProvider.class, method = "dynamicSQL")
-    List<B> selectBO(Q query);
+    List<B> selectBO(Object query);
 
 }

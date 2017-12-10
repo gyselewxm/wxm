@@ -35,11 +35,8 @@ import com.wxm.mybatis.mapper.provider.base.BaseSelectProvider;
  * <b>Date:</b> 2017年12月4日 下午12:11:46 <br>
  * <b>Author:</b> Gysele <br>
  * <b>Version:</b> 1.0.0
- * 
- * @param <Q>
- *            表对应查询条件实体
  */
-public interface SelectCountMapper<Q> {
+public interface SelectCountMapper {
 
     /**
      * 
@@ -54,6 +51,6 @@ public interface SelectCountMapper<Q> {
      * @return
      */
     @SelectProvider(type = BaseSelectProvider.class, method = "dynamicSQL")
-    int selectCount(Q query);
+    int selectCount(Object query);
 
 }

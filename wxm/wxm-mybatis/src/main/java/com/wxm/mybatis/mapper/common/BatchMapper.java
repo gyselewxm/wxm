@@ -12,12 +12,8 @@ import com.wxm.mybatis.mapper.common.batch.BatchInsertMapper;
  * 
  * @param <T>
  *            表对应实体
- * @param <B>
- *            表对应业务逻辑实体
- * @param <Q>
- *            表对应查询条件实体
  */
-public interface BatchMapper<T, B, Q> extends
+public interface BatchMapper<T> extends
         BatchInsertMapper<T> {
 
 }

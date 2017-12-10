@@ -2,7 +2,6 @@ package com.wxm.mybatis.example.mapper;
 
 import com.wxm.mybatis.example.pojo.bo.ExIsnullDefaultBO;
 import com.wxm.mybatis.example.pojo.entity.ExIsnullDefault;
-import com.wxm.mybatis.example.pojo.query.ExIsnullDefaultQuery;
 import com.wxm.mybatis.mapper.common.Mapper;
 
 /**
@@ -13,6 +12,7 @@ import com.wxm.mybatis.mapper.common.Mapper;
  * <b>Author:</b> Gysele <br>
  * <b>Version:</b> 1.0.0
  */
-public interface ExIsnullDefaultMapper extends Mapper<ExIsnullDefault, ExIsnullDefaultBO, ExIsnullDefaultQuery> {
+public interface ExIsnullDefaultMapper extends
+        Mapper<ExIsnullDefault, ExIsnullDefaultBO> {
     public ExIsnullDefault queryOne(String id);
 }

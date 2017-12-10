@@ -38,14 +38,12 @@ import com.wxm.mybatis.mapper.common.base.select.*;
  *            表对应实体
  * @param <B>
  *            表对应业务逻辑实体
- * @param <Q>
- *            表对应查询条件实体
  */
-public interface BaseSelectMapper<T, B, Q> extends
-        SelectOneMapper<T, B, Q>,
-        SelectMapper<T, B, Q>,
+public interface BaseSelectMapper<T, B> extends
+        SelectOneMapper<T, B>,
+        SelectMapper<T, B>,
         SelectAllMapper<T, B>,
-        SelectCountMapper<Q>,
+        SelectCountMapper,
         SelectByPrimaryKeyMapper<T, B> {
 
 }

@@ -35,12 +35,10 @@ package com.wxm.mybatis.mapper.common;
  *            表对应实体
  * @param <B>
  *            表对应业务逻辑实体
- * @param <Q>
- *            表对应查询条件实体
  */
-public interface Mapper<T, B, Q> extends
-        BaseMapper<T, B, Q>,
-        BatchMapper<T, B, Q>,
+public interface Mapper<T, B> extends
+        BaseMapper<T, B>,
+        BatchMapper<T>,
         Marker {
 
 }

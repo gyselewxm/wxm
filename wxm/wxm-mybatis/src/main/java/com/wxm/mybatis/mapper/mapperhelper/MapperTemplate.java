@@ -24,33 +24,42 @@
 
 package com.wxm.mybatis.mapper.mapperhelper;
 
-import org.apache.ibatis.mapping.*;
-import org.apache.ibatis.reflection.MetaObject;
-import org.apache.ibatis.reflection.SystemMetaObject;
-import org.apache.ibatis.scripting.xmltags.DynamicSqlSource;
-import org.apache.ibatis.scripting.xmltags.SqlNode;
-import org.apache.ibatis.scripting.xmltags.XMLLanguageDriver;
-
-import com.wxm.mybatis.mapper.MapperException;
-import com.wxm.mybatis.mapper.entity.EntityColumn;
-import com.wxm.mybatis.mapper.entity.EntityTable;
-import com.wxm.mybatis.mapper.util.StringUtil;
+import static com.wxm.mybatis.mapper.util.MsUtil.getMapperClass;
+import static com.wxm.mybatis.mapper.util.MsUtil.getMethodName;
 
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.lang.reflect.ParameterizedType;
 import java.lang.reflect.Type;
 import java.text.MessageFormat;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
-import static com.wxm.mybatis.mapper.util.MsUtil.getMapperClass;
-import static com.wxm.mybatis.mapper.util.MsUtil.getMethodName;
+import org.apache.ibatis.mapping.MappedStatement;
+import org.apache.ibatis.mapping.ResultMap;
+import org.apache.ibatis.mapping.SqlSource;
+import org.apache.ibatis.reflection.MetaObject;
+import org.apache.ibatis.reflection.SystemMetaObject;
+import org.apache.ibatis.scripting.xmltags.DynamicSqlSource;
+import org.apache.ibatis.scripting.xmltags.SqlNode;
+import org.apache.ibatis.scripting.xmltags.XMLLanguageDriver;
+
+import com.wxm.base.common.util.LoggerUtils;
+import com.wxm.mybatis.mapper.MapperException;
+import com.wxm.mybatis.mapper.entity.EntityColumn;
+import com.wxm.mybatis.mapper.entity.EntityTable;
+import com.wxm.mybatis.mapper.util.StringUtil;
 
 /**
- * 通用Mapper模板类，扩展通用Mapper时需要继承该类
- *
- * @author liuzh
+ * 
+ * <b>Title:</b> 通用Mapper模板类 <br>
+ * <b>Description:</b> 扩展通用Mapper时需要继承该类 <br>
+ * <b>Date:</b> 2017年12月10日 下午8:12:50 <br>
+ * <b>Author:</b> Gysele <br>
+ * <b>Version:</b> 1.0.0
  */
 public abstract class MapperTemplate {
     private static final XMLLanguageDriver languageDriver = new XMLLanguageDriver();
@@ -251,27 +260,6 @@ public abstract class MapperTemplate {
 
     /**
      * 
-     * <b>Title:</b> 获取表对应业务逻辑实体类型 <br>
-     * <b>Description:</b> <br>
-     * <b>Date:</b> 2017年12月3日 下午1:54:38 <br>
-     * <b>Author:</b> Gysele <br>
-     * <b>Version:</b> 1.0.0
-     * 
-     * @param ms
-     * @return
-     */
-    @Deprecated
-    public Class<?> getBOClass(MappedStatement ms) {
-        String msId = ms.getId();
-        String boMsId = String.format("%s_BO", msId);
-        if (!entityClassMap.containsKey(boMsId)) {
-            setClassMap(msId);
-        }
-        return entityClassMap.get(boMsId);
-    }
-
-    /**
-     * 
      * <b>Title:</b> 获取表对应查询条件实体类型 <br>
      * <b>Description:</b> <br>
      * <b>Date:</b> 2017年12月3日 下午1:55:11 <br>
@@ -282,20 +270,23 @@ public abstract class MapperTemplate {
      * @return
      */
     public Class<?> getQueryClass(MappedStatement ms) {
-        String msId = ms.getId();
-        String queryMsId = String.format("%s_QUERY", msId);
-        if (!entityClassMap.containsKey(queryMsId)) {
-            setClassMap(msId);
+        Class<?> entityClass = getEntityClass(ms);
+        Class<?> queryClass = null;
+        try {
+            queryClass = EntityHelper.getQueryClass(entityClass);
+        } catch (ClassNotFoundException e) {
+            LoggerUtils.error(String.format("%s表实体类没有对应表对应查询条件实体类", entityClass.getName()), e);
         }
-        return entityClassMap.get(queryMsId);
+        return queryClass;
     }
 
     /**
      * 
-     * <b>Title:</b>设置实体Map <br>
+     * <b>Title:</b> 设置实体Map <br>
      * <b>Description:</b> <br>
-     * <b>Date:</b> 2017年12月1日 下午2:09:30 <br>
-     * <b>Author:</b> Gysele
+     * <b>Date:</b> 2017年12月10日 下午8:31:46 <br>
+     * <b>Author:</b> Gysele <br>
+     * <b>Version:</b> 1.0.0
      * 
      * @param msId
      */
@@ -310,29 +301,11 @@ public abstract class MapperTemplate {
                     if (null == classTypes || 0 == classTypes.length) {
                         continue;
                     }
-                    /**
-                     * 表对应实体
-                     */
+                    // 表对应实体
                     Class<?> entityType = (Class<?>) classTypes[0];
                     // 获取该类型后，第一次对该类型进行初始化
                     EntityHelper.initEntityNameMap(entityType, mapperHelper.getConfig());
                     entityClassMap.put(msId, entityType);
-
-                    /**
-                     * 表对应业务逻辑实体
-                     */
-                    if (1 < classTypes.length) {
-                        Class<?> queryType = (Class<?>) classTypes[2];
-                        entityClassMap.put(String.format("%s_BO", msId), queryType);
-                    }
-
-                    /**
-                     * 表对应查询条件实体
-                     */
-                    if (2 < classTypes.length) {
-                        Class<?> queryType = (Class<?>) classTypes[2];
-                        entityClassMap.put(String.format("%s_QUERY", msId), queryType);
-                    }
                     return;
                 }
             }

@@ -40,10 +40,8 @@ import com.wxm.mybatis.mapper.provider.base.BaseSelectProvider;
  *            表对应实体
  * @param <B>
  *            表对应业务逻辑实体
- * @param <Q>
- *            表对应查询条件实体
  */
-public interface SelectOneMapper<T, B, Q> {
+public interface SelectOneMapper<T, B> {
     /**
      * 
      * <b>Title:</b> 根据查询条件获取一条表对应实体信息 <br>
@@ -57,7 +55,7 @@ public interface SelectOneMapper<T, B, Q> {
      * @return 表对应实体信息
      */
     @SelectProvider(type = BaseSelectProvider.class, method = "dynamicSQL")
-    T selectOne(Q query);
+    T selectOne(Object query);
 
     /**
      * 
@@ -72,5 +70,5 @@ public interface SelectOneMapper<T, B, Q> {
      * @return 表对应业务逻辑实体信息
      */
     @SelectProvider(type = BaseSelectProvider.class, method = "dynamicSQL")
-    B selectBOOne(Q query);
+    B selectBOOne(Object query);
 }

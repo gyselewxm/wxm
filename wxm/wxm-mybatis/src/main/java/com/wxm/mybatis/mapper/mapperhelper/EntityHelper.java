@@ -334,7 +334,7 @@ public class EntityHelper {
      * @return
      * @throws ClassNotFoundException
      */
-    private static Class<?> getBOClass(Class<?> entityClass) throws ClassNotFoundException {
+    public static Class<?> getBOClass(Class<?> entityClass) throws ClassNotFoundException {
         String boClassName = String.format("%sBO", entityClass.getName()).replace(".entity.", ".bo.");
         return Class.forName(boClassName);
     }
@@ -352,7 +352,7 @@ public class EntityHelper {
      * @return
      * @throws ClassNotFoundException
      */
-    private static Class<?> getQueryClass(Class<?> entityClass) throws ClassNotFoundException {
+    public static Class<?> getQueryClass(Class<?> entityClass) throws ClassNotFoundException {
         String queryClassName = String.format("%sQuery", entityClass.getName()).replace(".entity.", ".query.");
         return Class.forName(queryClassName);
     }

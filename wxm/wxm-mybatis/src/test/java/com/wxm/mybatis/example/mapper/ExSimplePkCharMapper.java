@@ -2,7 +2,6 @@ package com.wxm.mybatis.example.mapper;
 
 import com.wxm.mybatis.example.pojo.bo.ExSimplePkCharBO;
 import com.wxm.mybatis.example.pojo.entity.ExSimplePkChar;
-import com.wxm.mybatis.example.pojo.query.ExSimplePkCharQuery;
 import com.wxm.mybatis.mapper.common.Mapper;
 
 /**
@@ -13,6 +12,7 @@ import com.wxm.mybatis.mapper.common.Mapper;
  * <b>Author:</b> Gysele <br>
  * <b>Version:</b> 1.0.0
  */
-public interface ExSimplePkCharMapper extends Mapper<ExSimplePkChar, ExSimplePkCharBO, ExSimplePkCharQuery> {
+public interface ExSimplePkCharMapper extends
+        Mapper<ExSimplePkChar, ExSimplePkCharBO> {
 
 }
