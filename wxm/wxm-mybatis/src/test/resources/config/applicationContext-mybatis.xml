@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:context="http://www.springframework.org/schema/context"
+  xmlns:tx="http://www.springframework.org/schema/tx"
+  xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+                      http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
+
+  <!-- 数据源配置项 -->
+  <!-- 同个模块中如果出现多个context:property-placeholder，可添加ignore-unresolvable="true"，可以在加载第一个property-placeholder时出现解析不了的占位符进行忽略掉。目前可忽略。 -->
+  <context:property-placeholder ignore-unresolvable="true" file-encoding="UTF-8" location="classpath:config/jdbc.properties" />
+
+  <bean id="dataSource" class="com.alibaba.druid.pool.DruidDataSource" destroy-method="close" init-method="init">
+    <!-- 数据库驱动类 -->
+    <property name="driverClassName" value="${jdbc.driverClassName}" />
+    <!-- 数据库链接 -->
+    <property name="url" value="${jdbc.url}" />
+    <!-- 数据库用户名 -->
+    <property name="username" value="${jdbc.username}" />
+    <!-- 数据库密码 -->
+    <property name="password" value="${jdbc.password}" />
+    <!-- 初始化连接大小 -->
+    <property name="initialSize" value="${initialSize}" />
+    <!-- 连接池最大数量 -->
+    <property name="maxActive" value="${maxActive}" />
+    <!-- 连接池最小空闲 -->
+    <property name="minIdle" value="${minIdle}" />
+    <!-- 配置获取连接等待超时的时间 -->
+    <property name="maxWait" value="${maxWait}" />
+    <!-- 配置间隔多久才进行一次检测，检测需要关闭的空闲连接，单位是毫秒 -->
+    <property name="timeBetweenEvictionRunsMillis" value="60000" />
+    <!-- 配置一个连接在池中最小生存的时间，单位是毫秒 -->
+    <property name="minEvictableIdleTimeMillis" value="300000" />
+    <property name="validationQuery" value="SELECT '1'" />
+    <property name="testWhileIdle" value="true" />
+    <property name="testOnBorrow" value="true" />
+    <property name="testOnReturn" value="false" />
+  </bean>
+
+  <!-- 配置SqlSessionFactory对象，实例化sqlSessionFactory时需要使用上述配置好的数据源以及SQL映射文件 -->
+  <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+    <!-- 注入数据库连接池 -->
+    <property name="dataSource" ref="dataSource" />
+    <!-- 配置Mybatis全局配置文件 -->
+    <property name="configLocation" value="classpath:config/mybatis-config.xml"></property>
+    <!-- 自动给对应包中的类取别名，多个包名以“,; \t\n”任一分隔 -->
+    <!-- 若typeAliasesPackage的值中不存在通配符，sqlSessionFactory可使用org.mybatis.spring.SqlSessionFactoryBean进行配置 -->
+    <!-- 不管typeAliasesPackage的值中存不存在通配符，sqlSessionFactory都可使用com.wxm.base.mybatis.spring.PackagesSqlSessionFactoryBean进行配置 -->
+    <!-- <property name="typeAliasesPackage" value="com.wxm.**.pojo" /> -->
+    <!-- <property name="typeAliasesPackage" value="com.wxm.xx.pojo" /> -->
+    <!-- 自动扫描mapper目录下的所有映射的xml文件, 路径下的所有xml文件可以被自动扫描。 -->
+    <property name="mapperLocations" value="classpath*:mapper/com/wxm/**/*.mbt.xml" />
+  </bean>
+
+  <!-- 配置扫描DAO接口包，动态实现DAO接口，注入到Spring容器中 -->
+  <!-- 引入通用Mapper -->
+  <!-- <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer"> -->
+  <bean class="com.wxm.mybatis.spring.mapper.MapperScannerConfigurer">
+    <!-- 注入sqlSessionFactory（-使用sqlSessionFactoryBeanName是为了防止提前初始化sqlSessionFactory） -->
+    <property name="sqlSessionFactoryBeanName" value="sqlSessionFactory" />
+    <!-- 需要扫描DAO接口的包 -->
+    <property name="basePackage" value="com.wxm.mybatis.example.mapper" />
+    <property name="properties">
+      <!-- 主键UUID回写方法执行顺序,默认AFTER,可选值为(BEFORE|AFTER) -->
+      <value>
+        ORDER=BEFORE
+      </value>
+    </property>
+  </bean>
+</beans>
