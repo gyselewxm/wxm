@@ -1,0 +1,7 @@
+<?xml version = "1.0" encoding = "UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.wxm.mybatis.example.mapper.ExIsnullDefaultMapper">
+  <select id="queryOne" parameterType="String" resultType="com.wxm.mybatis.example.pojo.entity.ExIsnullDefault">
+    select * from ex_isnull_default where id = #{id}
+  </select>
+</mapper>
