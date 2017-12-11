@@ -21,9 +21,10 @@ public interface UpdateSelectiveMapper {
      * <b>Author:</b> Gysele <br>
      * <b>Version:</b> 1.0.0
      * 
-     * @param object
+     * @param query
+     *            表对应查询条件实体
      * @return
      */
     @UpdateProvider(type = BaseUpdateProvider.class, method = "dynamicSQL")
-    int updateSelective(Object object);
+    int updateSelective(Object query);
 }

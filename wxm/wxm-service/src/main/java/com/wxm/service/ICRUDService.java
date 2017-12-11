@@ -1,12 +1,23 @@
 package com.wxm.service;
 
 /**
- * <b>标题: </b> SERVICE层增删改查接口 <br/>
- * <b>描述: </b> <br/>
- * <b>作者: </b>吴晓敏 15109870670@139.com <br/>
- * <b>时间: </b>2017年6月25日 下午10:48:00 <br/>
- * <b>版本: </b>1.0
+ * 
+ * <b>Title:</b> 通用增删改查业务接口 <br>
+ * <b>Description:</b> <br>
+ * <b>Date:</b> 2017年12月11日 下午1:37:58 <br>
+ * <b>Author:</b> Gysele <br>
+ * <b>Version:</b> 1.0.0
+ * 
+ * @param <T>
+ *            表对应实体
+ * @param <B>
+ *            表对应业务逻辑实体
  */
-public interface ICRUDService<T, B> extends ICreateService<T>, IRetrieveService<T, B>, IUpdateService<T>, IDeleteService, IPagerService<B> {
+public interface ICRUDService<T, B> extends
+        ICreateService<T>,
+        IRetrieveService<T, B>,
+        IUpdateService<T>,
+        IDeleteService,
+        IPagerService<B> {
 
 }

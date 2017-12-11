@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE configuration
+  PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+  <!-- 配置全局属性 -->
+  <settings>
+    <!-- 开启驼峰命名转换:Table{create_time} -> Entity{createTime} -->
+    <setting name="mapUnderscoreToCamelCase" value="true" />
+    <!-- 以下logImpl、logPrefix是引入logback插件必备配置项 -->
+    <!-- 指定日志实现 -->
+    <setting name="logImpl" value="SLF4J" />
+    <!-- 在所有的SQL映射路径上加上“mapper”这个前缀 -->
+    <setting name="logPrefix" value="mapper." />
+  </settings>
+</configuration>
