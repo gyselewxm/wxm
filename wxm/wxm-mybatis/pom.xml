@@ -65,13 +65,11 @@
       <groupId>mysql</groupId>
       <artifactId>mysql-connector-java</artifactId>
       <version>${version.mysql}</version>
-      <scope>test</scope>
     </dependency>
     <dependency>
       <groupId>com.alibaba</groupId>
       <artifactId>druid</artifactId>
       <version>${version.druid}</version>
-      <scope>test</scope>
     </dependency>
 
     <!-- Mybatis -->
@@ -79,13 +77,11 @@
       <groupId>org.mybatis</groupId>
       <artifactId>mybatis</artifactId>
       <version>${version.mybatis}</version>
-      <scope>test</scope>
     </dependency>
     <dependency>
       <groupId>org.mybatis</groupId>
       <artifactId>mybatis-spring</artifactId>
       <version>${version.mybatis-spring}</version>
-      <scope>test</scope>
     </dependency>
   </dependencies>
 </project>
