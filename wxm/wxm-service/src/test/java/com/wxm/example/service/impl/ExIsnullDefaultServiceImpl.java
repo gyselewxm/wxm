@@ -4,7 +4,7 @@ import org.springframework.stereotype.Service;
 
 import com.wxm.example.pojo.bo.ExIsnullDefaultBO;
 import com.wxm.example.pojo.entity.ExIsnullDefault;
-import com.wxm.service.ICRUDService;
+import com.wxm.example.service.IExIsnullDefaultService;
 import com.wxm.service.abs.ACRUDService;
 
 /**
@@ -16,6 +16,6 @@ import com.wxm.service.abs.ACRUDService;
  */
 @Service
 public class ExIsnullDefaultServiceImpl extends ACRUDService<ExIsnullDefault, ExIsnullDefaultBO> implements
-        ICRUDService<ExIsnullDefault, ExIsnullDefaultBO> {
+        IExIsnullDefaultService {
 
 }
