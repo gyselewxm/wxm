@@ -5,8 +5,9 @@
   <version>0.0.2-SNAPSHOT</version>
   <packaging>pom</packaging>
   <modules>
-  	<module>wxm-base</module>
-  	<module>wxm-mybatis</module>
-  	<module>wxm-service</module>
+    <module>wxm-base</module>
+    <module>wxm-mybatis</module>
+    <module>wxm-service</module>
+    <module>wxm-web</module>
   </modules>
 </project>
