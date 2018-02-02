@@ -1,4 +1,4 @@
-package com.wxm.web.config;
+package com.wxm.web.config.client;
 
 import java.nio.charset.StandardCharsets;
 

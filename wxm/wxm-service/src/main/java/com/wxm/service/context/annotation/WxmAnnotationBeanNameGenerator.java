@@ -1,4 +1,4 @@
-package com.wxm.base.spring;
+package com.wxm.service.context.annotation;
 
 import java.beans.Introspector;
 

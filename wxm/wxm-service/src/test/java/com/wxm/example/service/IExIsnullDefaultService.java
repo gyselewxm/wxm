@@ -2,7 +2,7 @@ package com.wxm.example.service;
 
 import com.wxm.example.pojo.bo.ExIsnullDefaultBO;
 import com.wxm.example.pojo.entity.ExIsnullDefault;
-import com.wxm.service.ICRUDService;
+import com.wxm.service.base.ICRUDService;
 
 /**
  * <b>Title:</b> 示例-是否为空-默认<br>

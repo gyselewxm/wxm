@@ -1,4 +1,4 @@
-package com.wxm.service;
+package com.wxm.service.base;
 
 /**
  * <b>标题: </b>分页相关SERVICE接口 <br/>
