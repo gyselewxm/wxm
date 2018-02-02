@@ -1,4 +1,4 @@
-package com.wxm.web.config;
+package com.wxm.web.servlet.config.annotation;
 
 import java.nio.charset.StandardCharsets;
 import java.util.Arrays;

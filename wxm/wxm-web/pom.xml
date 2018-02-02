@@ -9,6 +9,8 @@
 
   <properties>
     <version.spring>5.0.0.RELEASE</version.spring>
+    <version.freemarker>2.3.26-incubating</version.freemarker>
+    <version.sitemesh>3.0.1</version.sitemesh>
   </properties>
 
   <dependencyManagement>
@@ -19,27 +21,22 @@
         <version>${version.spring}</version>
         <type>pom</type>
         <scope>import</scope>
-        <exclusions>
-          <!-- Exclude Commons Logging in favor of SLF4j -->
-          <exclusion>
-            <groupId>commons-logging</groupId>
-            <artifactId>commons-logging</artifactId>
-          </exclusion>
-        </exclusions>
       </dependency>
     </dependencies>
   </dependencyManagement>
 
   <dependencies>
-    <!-- Spring -->
+    <!-- Spring context的扩展支持，用于MVC方面 -->
     <dependency>
       <groupId>org.springframework</groupId>
-      <artifactId>spring-context</artifactId>
+      <artifactId>spring-context-support</artifactId>
     </dependency>
+    <!-- 包含Web应用开发时，用到Spring框架时所需的核心类，包括自动载入WebApplicationContext特性的类、Struts与JSF集成类、文件上传的支持类、Filter类和大量工具辅助类 -->
     <dependency>
       <groupId>org.springframework</groupId>
       <artifactId>spring-web</artifactId>
     </dependency>
+    <!-- 包含Spring MVC 框架相关的所有类。包括框架的Servlets，Web MVC框架，控制器和视图支持。 -->
     <dependency>
       <groupId>org.springframework</groupId>
       <artifactId>spring-webmvc</artifactId>
@@ -51,6 +48,20 @@
       <artifactId>servlet-api</artifactId>
       <version>2.5</version>
       <scope>provided</scope>
+    </dependency>
+
+    <!-- freemarker 模板引擎 -->
+    <dependency>
+      <groupId>org.freemarker</groupId>
+      <artifactId>freemarker</artifactId>
+      <version>${version.freemarker}</version>
+    </dependency>
+
+    <!-- 网页布局及修饰 -->
+    <dependency>
+      <groupId>org.sitemesh</groupId>
+      <artifactId>sitemesh</artifactId>
+      <version>${version.sitemesh}</version>
     </dependency>
   </dependencies>
 </project>

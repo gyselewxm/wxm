@@ -1,11 +1,11 @@
-package com.wxm.service.abs;
+package com.wxm.service.base.abs;
 
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
 import com.wxm.mybatis.mapper.common.Mapper;
-import com.wxm.service.ICRUDService;
+import com.wxm.service.base.ICRUDService;
 
 /**
  * 

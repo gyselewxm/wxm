@@ -1,4 +1,4 @@
-package com.wxm.service;
+package com.wxm.service.base;
 
 import java.util.List;
 
