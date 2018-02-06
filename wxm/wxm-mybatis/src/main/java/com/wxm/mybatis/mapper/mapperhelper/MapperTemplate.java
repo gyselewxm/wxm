@@ -47,7 +47,6 @@ import org.apache.ibatis.scripting.xmltags.DynamicSqlSource;
 import org.apache.ibatis.scripting.xmltags.SqlNode;
 import org.apache.ibatis.scripting.xmltags.XMLLanguageDriver;
 
-import com.wxm.base.common.util.LoggerUtils;
 import com.wxm.mybatis.mapper.MapperException;
 import com.wxm.mybatis.mapper.entity.EntityColumn;
 import com.wxm.mybatis.mapper.entity.EntityTable;
@@ -108,7 +107,8 @@ public abstract class MapperTemplate {
      * @return
      */
     public String getIDENTITY(EntityColumn column) {
-        return MessageFormat.format(mapperHelper.getConfig().getIDENTITY(), column.getSequenceName(), column.getColumn(), column.getProperty(), column.getTable().getName());
+        return MessageFormat.format(mapperHelper.getConfig().getIDENTITY(), column.getSequenceName(), column.getColumn(), column.getProperty(),
+                column.getTable().getName());
     }
 
     public boolean isBEFORE() {
@@ -275,7 +275,7 @@ public abstract class MapperTemplate {
         try {
             queryClass = EntityHelper.getQueryClass(entityClass);
         } catch (ClassNotFoundException e) {
-            LoggerUtils.error(String.format("%s表实体类没有对应表对应查询条件实体类", entityClass.getName()), e);
+            throw new MapperException(String.format("%s表实体类没有对应表对应查询条件实体类", entityClass.getName()), e);
         }
         return queryClass;
     }
@@ -320,7 +320,8 @@ public abstract class MapperTemplate {
      * @return
      */
     protected String getSeqNextVal(EntityColumn column) {
-        return MessageFormat.format(mapperHelper.getConfig().getSeqFormat(), column.getSequenceName(), column.getColumn(), column.getProperty(), column.getTable().getName());
+        return MessageFormat.format(mapperHelper.getConfig().getSeqFormat(), column.getSequenceName(), column.getColumn(), column.getProperty(),
+                column.getTable().getName());
     }
 
     /**

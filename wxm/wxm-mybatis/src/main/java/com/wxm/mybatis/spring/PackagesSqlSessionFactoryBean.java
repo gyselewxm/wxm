@@ -4,9 +4,10 @@ import java.io.IOException;
 
 import org.apache.ibatis.plugin.Interceptor;
 import org.mybatis.spring.SqlSessionFactoryBean;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.util.StringUtils;
 
-import com.wxm.base.common.util.LoggerUtils;
 import com.wxm.base.common.util.PackageUtils;
 
 /**
@@ -17,6 +18,7 @@ import com.wxm.base.common.util.PackageUtils;
  * <b>版本: </b>V1.0
  */
 public class PackagesSqlSessionFactoryBean extends SqlSessionFactoryBean {
+    private static Logger logger = LoggerFactory.getLogger(PackagesSqlSessionFactoryBean.class);
 
     @Override
     public void setTypeAliasesPackage(String typeAliasesPackage) {
@@ -26,7 +28,7 @@ public class PackagesSqlSessionFactoryBean extends SqlSessionFactoryBean {
             }
             super.setTypeAliasesPackage(typeAliasesPackage);
         } catch (IOException e) {
-            LoggerUtils.error("扫描实体类失败", e);
+            logger.error("扫描实体类失败", e);
         }
     }
 

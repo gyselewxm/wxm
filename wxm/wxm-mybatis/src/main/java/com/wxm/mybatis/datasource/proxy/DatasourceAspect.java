@@ -6,10 +6,11 @@ import java.util.regex.Pattern;
 
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.reflect.MethodSignature;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.core.annotation.AnnotationUtils;
 import org.springframework.transaction.support.TransactionSynchronizationManager;
 
-import com.wxm.base.common.util.LoggerUtils;
 import com.wxm.mybatis.datasource.annotation.DataSource;
 import com.wxm.mybatis.datasource.code.RoutingStrategy;
 import com.wxm.mybatis.datasource.lookup.DynamicRoutingContextHolder;
@@ -23,6 +24,7 @@ import com.wxm.mybatis.datasource.lookup.DynamicRoutingContextHolder;
  * <b>Version:</b> 1.0.0
  */
 public class DatasourceAspect {
+    private static Logger logger = LoggerFactory.getLogger(DatasourceAspect.class);
     public static final Pattern DELIMITER = Pattern.compile("insert*|update*|delete*");
 
     /**
@@ -57,10 +59,10 @@ public class DatasourceAspect {
                 // 设置该方法指定数据源
                 DynamicRoutingContextHolder.setRouteStrategy(methodAnnotation.value());
             }
-            LoggerUtils.info("Datasource type of '{}.{}' is '{}'.", joinPoint.getTarget().getClass().getName(), joinPoint.getSignature().getName(),
+            logger.info("Datasource type of '{}.{}' is '{}'.", joinPoint.getTarget().getClass().getName(), joinPoint.getSignature().getName(),
                     DynamicRoutingContextHolder.getRouteStrategy());
         } catch (NoSuchMethodException | SecurityException e) {
-            LoggerUtils.error("数据源获取异常", e);
+            logger.error("数据源获取异常", e);
         }
     }
 

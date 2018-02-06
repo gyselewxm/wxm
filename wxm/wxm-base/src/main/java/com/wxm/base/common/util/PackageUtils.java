@@ -2,6 +2,8 @@ package com.wxm.base.common.util;
 
 import java.io.IOException;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.core.io.Resource;
 import org.springframework.core.io.support.PathMatchingResourcePatternResolver;
 import org.springframework.core.io.support.ResourcePatternResolver;
@@ -15,6 +17,7 @@ import org.springframework.util.StringUtils;
  * <b>版本: </b>V1.0
  */
 public class PackageUtils {
+    private static Logger logger = LoggerFactory.getLogger(PackageUtils.class);
     private final static String TARGET_CLASS = "/target/classes/";
 
     /**
@@ -31,7 +34,7 @@ public class PackageUtils {
      */
     public static String getPackageWildcards(String str) throws IOException {
         if (!StringUtils.hasLength(str)) {
-            LoggerUtils.error("映射别名的包路径为空！！！");
+            logger.error("映射别名的包路径为空！！！");
             return null;
         }
         // 指定的所有包
@@ -40,12 +43,12 @@ public class PackageUtils {
         String[] packages = StringUtils.tokenizeToStringArray(str, ",; \t\n");
 
         if (packages == null || packages.length <= 0) {
-            LoggerUtils.error("映射别名的包路径不存在或路径错误！！！");
+            logger.error("映射别名的包路径不存在或路径错误！！！");
             return null;
         }
 
-        LoggerUtils.debug("----------根据指定的、包含通配符的包，获取所有包（开始）----------");
-        LoggerUtils.debug("配置文件源路径:{}", str);
+        logger.debug("----------根据指定的、包含通配符的包，获取所有包（开始）----------");
+        logger.debug("配置文件源路径:{}", str);
 
         for (String pkg : packages) {
             ResourcePatternResolver resolver = new PathMatchingResourcePatternResolver();
@@ -60,7 +63,7 @@ public class PackageUtils {
                 String packageUri = uri.replace("/", ".");
                 // 去掉最后一个“.”
                 packageUri = packageUri.substring(0, packageUri.length() - 1);
-                LoggerUtils.debug("{} -->> {}", uri, packageUri);
+                logger.debug("{} -->> {}", uri, packageUri);
                 if (resultPackages != null && resultPackages.length() > 0) {
                     // 若resultPackages不为空，则添加“,”
                     resultPackages.append(",");
@@ -70,8 +73,8 @@ public class PackageUtils {
             }
         }
         // 包名获取结果
-        LoggerUtils.debug("包名获取结果:\n{}", resultPackages.toString());
-        LoggerUtils.debug("----------根据指定的、包含通配符的包，获取所有包（结束）----------");
+        logger.debug("包名获取结果:\n{}", resultPackages.toString());
+        logger.debug("----------根据指定的、包含通配符的包，获取所有包（结束）----------");
         return resultPackages.toString();
     }
 }

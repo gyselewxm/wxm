@@ -25,6 +25,8 @@
 package com.wxm.mybatis.mapper.provider.base;
 
 import org.apache.ibatis.mapping.MappedStatement;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import com.wxm.mybatis.mapper.mapperhelper.MapperHelper;
 import com.wxm.mybatis.mapper.mapperhelper.MapperTemplate;
@@ -39,6 +41,7 @@ import com.wxm.mybatis.mapper.mapperhelper.SqlHelper;
  * <b>Version:</b> 1.0.0
  */
 public class BaseUpdateProvider extends MapperTemplate {
+    private static Logger logger = LoggerFactory.getLogger(BaseUpdateProvider.class);
 
     public BaseUpdateProvider(Class<?> mapperClass, MapperHelper mapperHelper) {
         super(mapperClass, mapperHelper);
@@ -96,9 +99,14 @@ public class BaseUpdateProvider extends MapperTemplate {
      * @return
      */
     public String update(MappedStatement ms) {
-        Class<?> entityClass = getEntityClass(ms);
-        Class<?> queryClass = getQueryClass(ms);
         StringBuilder sql = new StringBuilder();
+        Class<?> queryClass = null;
+        try {
+            queryClass = getQueryClass(ms);
+        } catch (Exception e) {
+            logger.warn("构建[根据表对应查询条件实体更新信息，null值会被更新]SQL语句异常");
+        }
+        Class<?> entityClass = getEntityClass(ms);
         sql.append(SqlHelper.updateTable(entityClass, tableName(entityClass)));
         sql.append(SqlHelper.updateSetColumns(entityClass, null, false, false));
         sql.append(SqlHelper.whereAllUpdateIfColumns(entityClass, queryClass, isNotEmpty()));
@@ -117,9 +125,14 @@ public class BaseUpdateProvider extends MapperTemplate {
      * @return
      */
     public String updateSelective(MappedStatement ms) {
-        Class<?> entityClass = getEntityClass(ms);
-        Class<?> queryClass = getQueryClass(ms);
         StringBuilder sql = new StringBuilder();
+        Class<?> queryClass = null;
+        try {
+            queryClass = getQueryClass(ms);
+        } catch (Exception e) {
+            logger.warn("构建[根据表对应查询条件实体更新属性不为null的值]SQL语句异常");
+        }
+        Class<?> entityClass = getEntityClass(ms);
         sql.append(SqlHelper.updateTable(entityClass, tableName(entityClass)));
         sql.append(SqlHelper.updateSetColumns(entityClass, null, true, isNotEmpty()));
         sql.append(SqlHelper.whereAllUpdateIfColumns(entityClass, queryClass, isNotEmpty()));

@@ -25,6 +25,8 @@
 package com.wxm.mybatis.mapper.provider.base;
 
 import org.apache.ibatis.mapping.MappedStatement;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import com.wxm.mybatis.mapper.mapperhelper.MapperHelper;
 import com.wxm.mybatis.mapper.mapperhelper.MapperTemplate;
@@ -39,6 +41,7 @@ import com.wxm.mybatis.mapper.mapperhelper.SqlHelper;
  * <b>Version:</b> 1.0.0
  */
 public class BaseSelectProvider extends MapperTemplate {
+    private static Logger logger = LoggerFactory.getLogger(BaseSelectProvider.class);
 
     public BaseSelectProvider(Class<?> mapperClass, MapperHelper mapperHelper) {
         super(mapperClass, mapperHelper);
@@ -100,11 +103,16 @@ public class BaseSelectProvider extends MapperTemplate {
      * @return
      */
     public String selectOne(MappedStatement ms) {
+        StringBuilder sql = new StringBuilder();
+        Class<?> queryClass = null;
+        try {
+            queryClass = getQueryClass(ms);
+        } catch (Exception e) {
+            logger.warn("构建[根据查询条件获取一条表对应实体信息]SQL语句异常");
+        }
         Class<?> entityClass = getEntityClass(ms);
-        Class<?> queryClass = getQueryClass(ms);
         // 修改返回值类型为表对应实体类型
         setResultType(ms, entityClass);
-        StringBuilder sql = new StringBuilder();
         sql.append(SqlHelper.selectAllColumns(entityClass));
         sql.append(SqlHelper.fromTable(entityClass, tableName(entityClass)));
         sql.append(SqlHelper.whereAllQueryIfColumns(entityClass, queryClass, isNotEmpty()));
@@ -123,11 +131,16 @@ public class BaseSelectProvider extends MapperTemplate {
      * @return
      */
     public String selectBOOne(MappedStatement ms) {
+        StringBuilder sql = new StringBuilder();
+        Class<?> queryClass = null;
+        try {
+            queryClass = getQueryClass(ms);
+        } catch (Exception e) {
+            logger.warn("构建[根据查询条件获取一条表对应业务逻辑实体信息]SQL语句异常");
+        }
         Class<?> entityClass = getEntityClass(ms);
-        Class<?> queryClass = getQueryClass(ms);
         // 修改返回值类型为表对应业务逻辑实体类型
         setBOResultType(ms, entityClass);
-        StringBuilder sql = new StringBuilder();
         sql.append(SqlHelper.selectAllBOColumns(entityClass));
         sql.append(SqlHelper.fromTable(entityClass, tableName(entityClass)));
         sql.append(SqlHelper.whereAllQueryIfColumns(entityClass, queryClass, isNotEmpty()));
@@ -146,11 +159,16 @@ public class BaseSelectProvider extends MapperTemplate {
      * @return
      */
     public String select(MappedStatement ms) {
+        StringBuilder sql = new StringBuilder();
+        Class<?> queryClass = null;
+        try {
+            queryClass = getQueryClass(ms);
+        } catch (Exception e) {
+            logger.warn("构建[根据查询条件获取表对应实体信息]SQL语句异常");
+        }
         Class<?> entityClass = getEntityClass(ms);
-        Class<?> queryClass = getQueryClass(ms);
         // 修改返回值类型为表对应实体类型
         setResultType(ms, entityClass);
-        StringBuilder sql = new StringBuilder();
         sql.append(SqlHelper.selectAllColumns(entityClass));
         sql.append(SqlHelper.fromTable(entityClass, tableName(entityClass)));
         sql.append(SqlHelper.whereAllQueryIfColumns(entityClass, queryClass, isNotEmpty()));
@@ -170,26 +188,21 @@ public class BaseSelectProvider extends MapperTemplate {
      * @return
      */
     public String selectBO(MappedStatement ms) {
+        StringBuilder sql = new StringBuilder();
+        Class<?> queryClass = null;
+        try {
+            queryClass = getQueryClass(ms);
+        } catch (Exception e) {
+            logger.warn("构建[根据查询条件获表对应业务逻辑实体信息]SQL语句异常");
+        }
         Class<?> entityClass = getEntityClass(ms);
-        Class<?> queryClass = getQueryClass(ms);
         // 修改返回值类型为表对应实体类型
         setBOResultType(ms, entityClass);
-        StringBuilder sql = new StringBuilder();
         sql.append(SqlHelper.selectAllBOColumns(entityClass));
         sql.append(SqlHelper.fromTable(entityClass, tableName(entityClass)));
         sql.append(SqlHelper.whereAllQueryIfColumns(entityClass, queryClass, isNotEmpty()));
         sql.append(SqlHelper.orderByDefault(entityClass));
         return sql.toString();
-    }
-
-    /**
-     * 查询
-     *
-     * @param ms
-     * @return
-     */
-    public String selectByRowBounds(MappedStatement ms) {
-        return select(ms);
     }
 
     /**
@@ -204,9 +217,14 @@ public class BaseSelectProvider extends MapperTemplate {
      * @return
      */
     public String selectCount(MappedStatement ms) {
-        Class<?> entityClass = getEntityClass(ms);
-        Class<?> queryClass = getQueryClass(ms);
         StringBuilder sql = new StringBuilder();
+        Class<?> queryClass = null;
+        try {
+            queryClass = getQueryClass(ms);
+        } catch (Exception e) {
+            logger.warn("构建[根据查询条件获取信息总数]SQL语句异常");
+        }
+        Class<?> entityClass = getEntityClass(ms);
         sql.append(SqlHelper.selectCount(entityClass));
         sql.append(SqlHelper.fromTable(entityClass, tableName(entityClass)));
         sql.append(SqlHelper.whereAllQueryIfColumns(entityClass, queryClass, isNotEmpty()));
