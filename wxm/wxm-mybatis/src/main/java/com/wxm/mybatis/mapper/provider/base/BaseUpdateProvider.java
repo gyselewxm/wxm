@@ -104,7 +104,7 @@ public class BaseUpdateProvider extends MapperTemplate {
         try {
             queryClass = getQueryClass(ms);
         } catch (Exception e) {
-            logger.warn("构建[根据表对应查询条件实体更新信息，null值会被更新]SQL语句异常");
+            logger.warn("构建[{}]SQL语句失败", ms.getId());
         }
         Class<?> entityClass = getEntityClass(ms);
         sql.append(SqlHelper.updateTable(entityClass, tableName(entityClass)));
@@ -130,7 +130,7 @@ public class BaseUpdateProvider extends MapperTemplate {
         try {
             queryClass = getQueryClass(ms);
         } catch (Exception e) {
-            logger.warn("构建[根据表对应查询条件实体更新属性不为null的值]SQL语句异常");
+            logger.warn("构建[{}]SQL语句失败", ms.getId());
         }
         Class<?> entityClass = getEntityClass(ms);
         sql.append(SqlHelper.updateTable(entityClass, tableName(entityClass)));

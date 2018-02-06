@@ -108,7 +108,7 @@ public class BaseSelectProvider extends MapperTemplate {
         try {
             queryClass = getQueryClass(ms);
         } catch (Exception e) {
-            logger.warn("构建[根据查询条件获取一条表对应实体信息]SQL语句异常");
+            logger.warn("构建[{}]SQL语句失败", ms.getId());
         }
         Class<?> entityClass = getEntityClass(ms);
         // 修改返回值类型为表对应实体类型
@@ -136,7 +136,7 @@ public class BaseSelectProvider extends MapperTemplate {
         try {
             queryClass = getQueryClass(ms);
         } catch (Exception e) {
-            logger.warn("构建[根据查询条件获取一条表对应业务逻辑实体信息]SQL语句异常");
+            logger.warn("构建[{}]SQL语句失败", ms.getId());
         }
         Class<?> entityClass = getEntityClass(ms);
         // 修改返回值类型为表对应业务逻辑实体类型
@@ -164,7 +164,7 @@ public class BaseSelectProvider extends MapperTemplate {
         try {
             queryClass = getQueryClass(ms);
         } catch (Exception e) {
-            logger.warn("构建[根据查询条件获取表对应实体信息]SQL语句异常");
+            logger.warn("构建[{}]SQL语句失败", ms.getId());
         }
         Class<?> entityClass = getEntityClass(ms);
         // 修改返回值类型为表对应实体类型
@@ -193,7 +193,7 @@ public class BaseSelectProvider extends MapperTemplate {
         try {
             queryClass = getQueryClass(ms);
         } catch (Exception e) {
-            logger.warn("构建[根据查询条件获表对应业务逻辑实体信息]SQL语句异常");
+            logger.warn("构建[{}]SQL语句失败", ms.getId());
         }
         Class<?> entityClass = getEntityClass(ms);
         // 修改返回值类型为表对应实体类型
@@ -222,7 +222,7 @@ public class BaseSelectProvider extends MapperTemplate {
         try {
             queryClass = getQueryClass(ms);
         } catch (Exception e) {
-            logger.warn("构建[根据查询条件获取信息总数]SQL语句异常");
+            logger.warn("构建[{}]SQL语句失败", ms.getId());
         }
         Class<?> entityClass = getEntityClass(ms);
         sql.append(SqlHelper.selectCount(entityClass));
